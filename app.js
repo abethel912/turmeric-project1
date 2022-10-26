@@ -12,9 +12,11 @@ const baseURL = 'https://www.googleapis.com/books/v1/volumes?'
 const $headingDiv = document.getElementById('heading')
 const $fullDiv = document.getElementById('full')
 const $authorDiv = document.getElementById('author')
-const $genreDiv = document.getElementById('genre')
+const $descDiv = document.getElementById('desc')
 const $pageDiv = document.getElementById('page')
+const $img = document.getElementById('img')
 const $input = $('#input')
+
 
 // Store a reference to the input element
 
@@ -22,7 +24,6 @@ $('form').on('submit', getSubject);
 
 // function that does book autobiography search
 function getSubject(event) {
-  console.log(event)
   event.preventDefault();
 
   // Assign value from input to userInput variable and use that value to modify AJAX request
@@ -31,28 +32,31 @@ function getSubject(event) {
 
   // make initial request
   $.ajax({
-    url: `${baseURL}q=${userInput}&key=${apiKey}`,
-  })
-    .then(
+    url: `${baseURL}q=intitle:${userInput}+subject:fantasy&key=${apiKey}`
+  }).then(
     (data) => {
       console.log(data)
-      bookData = data;
-      render();
+      bookData = data
+      render()
     },
-      (error) => {
-        console.log('bad request', error);
-}
+    (error) => {
+      console.log('bad request', error)
+    }
   )
-    // render the data
+  
 }
   
 // Create render function to transfer the data on line 2 to the DOM
 
-// function render() {
-//   $headingDiv.text(`Book Title: ` + userInput);
-//   $fullDiv.text(`Full Title: ` + bookData.items.title)
+function render() {
+  $headingDiv.text(`Book Title: ` + userInput);
+  $fullDiv.text(`Full Title: ` + bookData.items.title)
+  $authorDiv.text(`Author: ` + bookData.items.author)
+  $descDiv.text(`Summary: ` + bookData.items.description)
+  $pageDiv.text(`Page Count: ` + bookData.items.pageCount)
+  
 
-// }
+}
 
 
 
