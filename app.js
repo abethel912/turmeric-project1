@@ -9,12 +9,11 @@ const baseURL = 'https://www.googleapis.com/books/v1/volumes?'
 
 // store DOM variables
 
-const $headingDiv = document.getElementById('heading')
-const $fullDiv = document.getElementById('full')
-const $authorDiv = document.getElementById('author')
-const $descDiv = document.getElementById('desc')
-const $pageDiv = document.getElementById('page')
-const $img = document.getElementById('img')
+const $headingDiv = $('#heading')
+const $fullDiv = $('#full')
+const $authorDiv = $('#author')
+const $descDiv = $('#desc')
+const $pageDiv = $('#page')
 const $input = $('#input')
 
 
@@ -36,8 +35,18 @@ function getSubject(event) {
   }).then(
     (data) => {
       console.log(data)
-      bookData = data
-      render()
+      bookData = data;
+      for (let i = 0; i < bookData.length; i++) {
+        console.log(i)
+      }
+      
+      $headingDiv.text(userInput);
+      $fullDiv.text(bookData.items[0].volumeInfo.title)
+      $authorDiv.text(bookData.items[0].volumeInfo.authors)
+      $descDiv.text(bookData.items[0].volumeInfo.description)
+      $pageDiv.text(`Page Count: ` + bookData.items[0].volumeInfo.pageCount)
+
+    
     },
     (error) => {
       console.log('bad request', error)
@@ -48,15 +57,9 @@ function getSubject(event) {
   
 // Create render function to transfer the data on line 2 to the DOM
 
-function render() {
-  $headingDiv.text(`Book Title: ` + userInput);
-  $fullDiv.text(`Full Title: ` + bookData.items.title)
-  $authorDiv.text(`Author: ` + bookData.items.author)
-  $descDiv.text(`Summary: ` + bookData.items.description)
-  $pageDiv.text(`Page Count: ` + bookData.items.pageCount)
-  
 
-}
+
+
 
 
 
