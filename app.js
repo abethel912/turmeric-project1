@@ -48,12 +48,7 @@ function getSubject(event) {
       }
 
       
-      $imgDiv.attr(
-        'src',
-        true
-          ? bookData.items[0].volumeInfo.imageLinks.smallThumbnail
-          : 'https://res.cloudinary.com/jerrick/image/upload/v1610450296/5ffd857883f7a1001c77a8bf.jpg'
-      )
+      $imgDiv.attr('src',true? bookData.items[0].volumeInfo.imageLinks.smallThumbnail: 'https://res.cloudinary.com/jerrick/image/upload/v1610450296/5ffd857883f7a1001c77a8bf.jpg')
       $fullDiv.text(bookData.items[0].volumeInfo.title)
       $authorDiv.text(bookData.items[0].volumeInfo.authors)
       $descDiv.text(bookData.items[0].volumeInfo.description)
