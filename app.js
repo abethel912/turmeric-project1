@@ -46,24 +46,32 @@ function getSubject(event) {
 
         $('#search').append(`<h1>${data.items[i].volumeInfo.title}</h1>`)
         $('#search').append(
-          `<div class='thumbnail'><img class='thumbnail 'src=${bookData.items[i].volumeInfo.imageLinks.smallThumbnail}></img></div>`
+          `<div class='thumbnail'><img class='thumbnail 'src=${bookData.items[i].volumeInfo.imageLinks.smallThumbnail? bookData.items[i].volumeInfo.imageLinks.smallThumbnail: 'https://img.freepik.com/premium-photo/opened-book-bible-background_112554-164.jpg?w=360'}></img></div>`
         )
         $('#search').append(
-          `<p> Author: ${data.items[i].volumeInfo.authors}</p>`
+          `<p> Author: ${data.items[i].volumeInfo.authors?data.items[i].volumeInfo.authors: 'N/A'}</p>`
         )
         $('#search').append(
-          `<p> Summary: ${data.items[i].volumeInfo.description}</p>`
+          `<p> Summary: ${data.items[i].volumeInfo.description?data.items[i].volumeInfo.description: 'N/A'}</p>`
         )
         $('#search').append(
-          `<p> Page Count: ${data.items[i].volumeInfo.pageCount}</p>`
+          `<p> Page Count: ${data.items[i].volumeInfo.pageCount?data.items[i].volumeInfo.pageCount: 'N/A'}</p>`
         )        
       }
 
       $imgDiv.attr('src',bookData.items[0].volumeInfo.imageLinks.smallThumbnail)
       $fullDiv.text(bookData.items[0].volumeInfo.title)
       $authorDiv.text(bookData.items[0].volumeInfo.authors)
-      $descDiv.text(bookData.items[0].volumeInfo.description)
-      $pageDiv.text(bookData.items[0].volumeInfo.pageCount)
+      $descDiv.text(bookData.items[0].volumeInfo.description? bookData.items[0].volumeInfo.description: 'N/A')
+      
+      bookData.items[0].volumeInfo.pageCount ? $pageDiv.text(bookData.items[0].volumeInfo.pageCount) : 'N/A'
+
+      // function noDisplay() {
+      //   if (bookData.items[0].volumeInfo.pageCount === undefined) {
+      //     return 'Page Count Not Found'
+      //   }
+      // }
+      // noDisplay()
     },
 
     
