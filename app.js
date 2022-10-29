@@ -1,5 +1,5 @@
 // Set up state variables for our book data.
-let bookData, userInput;
+let bookData, userInput, getAuthor;
 
 // variable for api key
 const apiKey = 'AIzaSyBoGmNgzAJ-VEJYNN5PVRkZqEYJskVEGP4'
@@ -18,6 +18,7 @@ const $pageDiv = $('#page')
 const $input = $('#input')
 
 
+
 // Store a reference to the input element
 
 $('form').on('submit', getSubject);
@@ -26,6 +27,8 @@ $('form').on('submit', getSubject);
 function getSubject(event) {
   event.preventDefault();
   $('#search').empty();
+  
+ 
 
   // Assign value from input to userInput variable and use that value to modify AJAX request
   userInput = $input.val();
@@ -33,27 +36,38 @@ function getSubject(event) {
 
   // make initial request
   $.ajax({
-    url: `${baseURL}q=intitle:${userInput}+subject:fantasy&printType=books&key=${apiKey}&maxResults=40`
+    url: `${baseURL}q=intitle:${userInput}&key=${apiKey}`
   }).then(
     (data) => {
       console.log(data)
       bookData = data
       for (let i = 0; i < data.items.length; i++) {
         console.log(data.items[i].volumeInfo)
+
         $('#search').append(`<h1>${data.items[i].volumeInfo.title}</h1>`)
-        $('#search').append(`<div class='thumbnail'><img class='thumbnail 'src=${bookData.items[i].volumeInfo.imageLinks.smallThumbnail}></img></div>`)
-        $('#search').append(`<p> Author: ${data.items[i].volumeInfo.authors}</p>`)
-        $('#search').append(`<p> Summary: ${data.items[i].volumeInfo.description}</p>`)
-        $('#search').append(`<p> Page Count: ${data.items[i].volumeInfo.pageCount}</p>`)
+        $('#search').append(
+          `<div class='thumbnail'><img class='thumbnail 'src=${bookData.items[i].volumeInfo.imageLinks.smallThumbnail}></img></div>`
+        )
+        $('#search').append(
+          `<p> Author: ${data.items[i].volumeInfo.authors}</p>`
+        )
+        $('#search').append(
+          `<p> Summary: ${data.items[i].volumeInfo.description}</p>`
+        )
+        $('#search').append(
+          `<p> Page Count: ${data.items[i].volumeInfo.pageCount}</p>`
+        )        
       }
 
-      
-      $imgDiv.attr('src',true? bookData.items[0].volumeInfo.imageLinks.smallThumbnail: 'https://res.cloudinary.com/jerrick/image/upload/v1610450296/5ffd857883f7a1001c77a8bf.jpg')
+      $imgDiv.attr('src',bookData.items[0].volumeInfo.imageLinks.smallThumbnail)
       $fullDiv.text(bookData.items[0].volumeInfo.title)
       $authorDiv.text(bookData.items[0].volumeInfo.authors)
       $descDiv.text(bookData.items[0].volumeInfo.description)
-      $pageDiv.text( bookData.items[0].volumeInfo.pageCount)
+      $pageDiv.text(bookData.items[0].volumeInfo.pageCount)
     },
+
+    
+
     (error) => {
       console.log('bad request', error)
     }
@@ -67,7 +81,7 @@ function getSubject(event) {
 
 
 
-
+// ;`url: ${baseURL}q=intitle:${userInput}printType=books&key=${apiKey}&maxResults=40`
 
 
 

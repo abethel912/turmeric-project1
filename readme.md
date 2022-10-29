@@ -1,6 +1,6 @@
-# Flagship Books
+# Book-Ey
 
-Flagship Books is the must-have book app for any book memoir. This app allows you to search for any autobiography information including title, author, genre description, and book length.
+Book-Ey is the must-have book app for any book lover. This app allows you to search for any book information including title, author, genre description, and book length.
 
 ### Technologies Used
 
@@ -24,9 +24,8 @@ Very Simple Layout that displays a search bar below the book information, with t
 | 2 | Render data to screen |
 | 3 | Render data to screen |
 | 4 | Build Responsivity|
-| 5 | Test Mobile App|
-| 6 | Style|
-  7 | Style|
+| 5 | Style|
+  6 | Style|
 
 ### Link to Project
 https://abethel912.github.io/turmeric-project1/
